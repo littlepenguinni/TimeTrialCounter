@@ -1,0 +1,25 @@
+.align-button {
+  margin-top: 23px;
+}
+
+.runner-container {
+  margin-top: 10px;
+  padding: 0 5px;
+
+  & .inner{
+    border: 1px rgb(222, 226, 230) solid;
+    border-radius: 5px;
+    padding: 5px;
+
+    & span{
+      display:inline-block;
+      width:75px;
+    }
+  }
+}
+
+.margin-top20{
+  margin-top: 20px;
+}
+
+

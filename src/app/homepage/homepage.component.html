@@ -1,0 +1,24 @@
+<div class="container">
+  <h1 class="fw-bold">Time Trial Lap Counter App <img src="/r4a.png" alt="logo" style="max-height: 50px; float: right"></h1>
+  <p>Add Runners to the app</p>
+  <form class="row" [formGroup]="runnerForm" (ngSubmit)="submitForm()">
+    <div class="form-group col-6">
+      <label for="number">Number/Name</label>
+      <input type="text" class="form-control col-9" id="number" formControlName="number">
+    </div>
+    <button type="submit" class="btn btn-primary col-2 align-button positive-button">Add</button>
+  </form>
+  <div class="runners row">
+    <div *ngFor="let runner of runnerList; let i = index" class="runner-container col-3" >
+      <div class="inner">
+        <span>{{runner.number}}</span>
+        <button (click)="removeRunner(i)" type="button" class="btn btn-primary negative-button">Remove</button>
+      </div>
+
+    </div>
+  </div>
+  <div *ngIf="runnerList.length > 0" class="row margin-top20">
+    <button (click)="startCounter()" type="button" class="btn btn-primary col-2 positive-button">Start</button>
+    <button (click)="resetRunners()" type="button" class="btn btn-primary col-2 offset-8 negative-button">Reset</button>
+  </div>
+</div>

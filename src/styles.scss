@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Required Bootstrap imports
+//@import '../node_modules/bootstrap/scss/functions';
+//@import "../node_modules/bootstrap/scss/variables";
+//@import "../node_modules/bootstrap/scss/variables-dark";
+//@import "../node_modules/bootstrap/scss/maps";
+//@import "../node_modules/bootstrap/scss/mixins";
+//@import "../node_modules/bootstrap/scss/root";
+
+button{
+  height: 40px;
+}
+
+.container{
+  margin-top: 20px
+}
+
+.positive-button {
+  color: black;
+  background-color: #CAFFBF;
+  border: 1px solid #CAFFBF;
+
+  &:hover,&:focus,&:active {
+    background-color: #1fb200;
+    border: 1px solid #1fb200;
+  }
+}
+
+.negative-button {
+  color: black;
+  background-color: #FFADAD;
+  border: 1px solid #FFADAD;
+
+  &:hover,&:focus {
+    background-color: #ab0000;
+    border: 1px solid #ab0000;
+  }
+}
+

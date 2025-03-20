@@ -1,0 +1,48 @@
+.container{
+  margin-top: 20px
+}
+.runner-card {
+  height: 85px;
+  text-align: center;
+  border: 2px solid black;
+  & .title{
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 0px;
+  }
+  & .laps{
+    font-size: 25px;
+  }
+  &.red{
+    background-color: #FFADAD;
+    color: black;
+  }
+  &.orange{
+    background-color: #FFD6A5;
+    color: black;
+  }
+  &.yellow{
+    background-color: #FDFFB6;
+    color: black;
+  }
+  &.green{
+    background-color: #CAFFBF;
+    color: black;
+  }
+  &.blue{
+    background-color: #A0C4FF;
+    color: black;
+  }
+  &.indigo{
+    background-color: #BDB2FF;
+    color: black;
+  }
+  &.violet{
+    background-color: #FFC6FF;
+    color: black;
+  }
+}
+
+.home{
+  margin-top: 20px;
+}
