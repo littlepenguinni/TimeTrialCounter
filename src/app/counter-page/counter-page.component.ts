@@ -19,6 +19,7 @@ export class CounterPageComponent  implements OnInit{
 
 
   ngOnInit(): void {
+    console.log(this.runnerList);
     if(this.runnerList === null){
       this.runnerList = [];
     }
