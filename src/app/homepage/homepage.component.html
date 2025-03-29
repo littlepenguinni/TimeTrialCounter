@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/html">
   <h1 class="fw-bold"><img src="/r4a.png" alt="logo" style="max-height: 50px;"> Time Trial Lap Counter</h1>
   <p>Add Runners to the app</p>
   <p>Updating the lap number after starting the counter will reset everyone's laps to the new value</p>
@@ -25,10 +25,23 @@
         </div>
       </div>
     </div>
+    <h2 style="margin-top: 10px;">{{laps}} Laps</h2>
   </ng-container>
 
   <div *ngIf="runnerList.length > 0" class="row margin-top20">
     <button (click)="startCounter()" type="button" class="btn btn-primary col-2 positive-button">Start</button>
-    <button (click)="resetRunners()" type="button" class="btn btn-primary col-2 offset-8 negative-button">Reset</button>
+    <button (click)="open(content)" type="button" class="btn btn-primary col-2 offset-8 negative-button">Reset</button>
   </div>
 </div>
+
+<ng-template #content let-modal>
+
+  <div class="container" style="padding: 0 20px 20px">
+    <h2>Are you sure?</h2>
+    <div class="row" style="margin: 20px">
+      <button (click)="resetRunners()" type="button" class="btn btn-primary col-2 positive-button">Yes</button>
+      <button (click)="modal.close(content)" type="button" class="btn btn-primary col-2 negative-button" style="margin-left:20px">No</button>
+    </div>
+  </div>
+
+</ng-template>

@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit, TemplateRef} from '@angular/core';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-homepage',
@@ -16,6 +17,7 @@ export class HomepageComponent implements OnInit {
   runnerList: any = JSON.parse(<string>window.localStorage.getItem("runners"));
   finishedRunners: any = JSON.parse(<string>window.localStorage.getItem("finishedRunners"));
   lapsSet: boolean = JSON.parse(<string>window.localStorage.getItem("lapsSet"));
+  private modalService = inject(NgbModal);
 
   constructor(private formBuilder: FormBuilder, private router: Router) {
   }
@@ -74,9 +76,16 @@ export class HomepageComponent implements OnInit {
     window.localStorage.setItem("lapsSet", JSON.stringify(this.lapsSet));
     this.laps = 7
     window.localStorage.setItem("laps", JSON.stringify(this.laps));
+    this.modalService.dismissAll();
   }
 
   startCounter () {
     this.router.navigateByUrl('/counter');
   };
+
+
+  open(content: TemplateRef<any>) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
+  }
+
 }
