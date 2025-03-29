@@ -4,7 +4,7 @@
       <button *ngIf="runner.laps !== 0"
               (click)="singleClick(runner)"
               (dblclick)="doubleClick(runner)"
-              class="col-2 runner-card"
+              class="col-3 runner-card"
               [class.red]="runner.laps % 7 === 0"
               [class.orange]="runner.laps % 7 === 1"
               [class.yellow]="runner.laps % 7 === 2"
@@ -20,7 +20,7 @@
       <button *ngIf="finishedRunner.laps === 0"
               (click)="singleClickFinished()"
               (dblclick)="doubleClickFinished(finishedRunner, i)"
-              class="col-2 runner-card">
+              class="col-3 runner-card">
         <p class="title">{{finishedRunner.number}}</p>
         <p class="laps">{{finishedRunner.laps}}</p>
       </button>
