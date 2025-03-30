@@ -65,6 +65,7 @@ export class HomepageComponent implements OnInit {
 
   removeRunner(index: number): void {
     this.runnerList.splice(index, 1);
+    window.localStorage.setItem("runners", JSON.stringify(this.runnerList));
   }
 
   resetRunners(){
