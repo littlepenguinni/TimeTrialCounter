@@ -14,11 +14,14 @@
   & .inner{
     border: 1px rgb(222, 226, 230) solid;
     border-radius: 5px;
+    display: flex;
+    justify-content: space-evenly;
     padding: 5px;
 
     & span{
-      display:inline-block;
-      width:75px;
+      display: inline-block;
+      margin-top: 7px;
+      width: 75px;
     }
   }
 }
