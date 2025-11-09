@@ -24,7 +24,8 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.runnerForm = this.formBuilder.group({
-      number: ['', [Validators.required]]
+      number: ['', [Validators.required]],
+      numberSort: ['numerical']
     });
     this.lapsForm = this.formBuilder.group({
       laps: [this.laps, [Validators.required]]
@@ -57,7 +58,12 @@ export class HomepageComponent implements OnInit {
       if (!this.runnerList.some((el: { number: void; }) => el.number === numberToAdd)){
         this.runnerList.push({number: numberToAdd, laps: this.laps});
       }
-      this.runnerList.sort((a: { number: number; }, b: { number: number; }) => (a.number < b.number ? -1 : 1));
+      if(this.runnerForm.controls['numberSort'].value === 'lexicographical'){
+        this.runnerList.sort((a: { number: number; }, b: { number: number; }) => (a.number < b.number ? -1 : 1));
+      }
+      else{
+        this.runnerList.sort((a: { number: number }, b: { number: number }) => a.number - b.number);
+      }
       window.localStorage.setItem("runners", JSON.stringify(this.runnerList));
       this.runnerForm.controls['number'].setValue();
     }
@@ -81,6 +87,14 @@ export class HomepageComponent implements OnInit {
   }
 
   startCounter () {
+    if(this.runnerForm.controls['numberSort'].value === 'lexicographical'){
+      this.runnerList.sort((a: { number: number; }, b: { number: number; }) => (a.number < b.number ? -1 : 1));
+    }
+    else{
+      this.runnerList.sort((a: { number: number }, b: { number: number }) => a.number - b.number);
+    }
+    window.localStorage.setItem("runners", JSON.stringify(this.runnerList));
+    this.runnerForm.controls['number'].setValue();
     this.router.navigateByUrl('/counter');
   };
 
