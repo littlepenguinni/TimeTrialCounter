@@ -94,7 +94,6 @@ export class HomepageComponent implements OnInit {
     else{
       this.runnerList.sort((a: { number: number }, b: { number: number }) => a.number - b.number);
     }
-    console.log(this.runnerForm.controls['numberSort'].value)
     window.localStorage.setItem("sorting",this.runnerForm.controls['numberSort'].value);
     window.localStorage.setItem("runners", JSON.stringify(this.runnerList));
     this.runnerForm.controls['number'].setValue();
