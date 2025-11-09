@@ -32,21 +32,10 @@ export class CounterPageComponent  implements OnInit{
     this.clickTimer = setTimeout( () => {this.completeLap(runnerToUpdate);}, 300);
   }
 
-  singleClickFinished(){
-    this.clickTimer = setTimeout( () => {}, 300);
-
-  }
-
   doubleClick(runnerToUpdate: { number: number; laps: number; }){
     clearTimeout(this.clickTimer);
     this.clickTimer = undefined;
     this.incrementLap(runnerToUpdate);
-  }
-
-  doubleClickFinished(runnerToUpdate: { number: number; laps: number; }, index: number){
-    clearTimeout(this.clickTimer);
-    this.clickTimer = undefined;
-    this.incrementLapFinished(runnerToUpdate, index);
   }
 
   completeLap(runnerToUpdate:  { number: number; laps: number }){
@@ -57,8 +46,14 @@ export class CounterPageComponent  implements OnInit{
           return {...runner, laps: runner.laps - 1};
         }
         else {
-          this.finishedRunners.push({...runner, laps: runner.laps - 1});
-          return {...runner, laps: runner.laps - 1};
+          // Only push to finishedRunners if the runner is not already there
+          const alreadyFinished = this.finishedRunners.some(
+            (finishedRunner: { number: number }) => finishedRunner.number === runner.number
+          );
+          if (!alreadyFinished) {
+            this.finishedRunners.push({ ...runner, laps: 0 });
+          }
+          return { ...runner, laps: 0 }; // Update laps to 0
         }
       }
       return runner;
@@ -71,6 +66,10 @@ export class CounterPageComponent  implements OnInit{
     clearTimeout(this.clickTimer);
     this.clickTimer = undefined;
 
+    if(runnerToUpdate.laps === 0) {
+      return this.incrementLapFinished(runnerToUpdate)
+    }
+
     this.runnerList = this.runnerList.map((runner: { number: number; laps: number; }) => {
       if (runner.number === runnerToUpdate.number) {
       return {...runner, laps: runner.laps + 1};
@@ -80,7 +79,7 @@ export class CounterPageComponent  implements OnInit{
   window.localStorage.setItem("runners", JSON.stringify(this.runnerList));
   }
 
-  incrementLapFinished(runnerToUpdate:  { number: number; laps: number }, index: number){
+  incrementLapFinished(runnerToUpdate:  { number: number; laps: number }){
     clearTimeout(this.clickTimer);
     this.clickTimer = undefined;
 
@@ -90,10 +89,13 @@ export class CounterPageComponent  implements OnInit{
       }
       return runner;
     });
+    const index = this.finishedRunners.findIndex(
+      (runner: { number: number; laps: number; }) => runner.number === runnerToUpdate.number
+    );
+    //Remove from finished runners if going from 0 to 1 laps
     this.finishedRunners.splice(index, 1);
     window.localStorage.setItem("runners", JSON.stringify(this.runnerList));
     window.localStorage.setItem("finishedRunners", JSON.stringify(this.finishedRunners));
-
   }
 
   home() {

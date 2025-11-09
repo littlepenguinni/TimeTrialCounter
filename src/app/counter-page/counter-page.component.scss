@@ -42,8 +42,20 @@
     background-color: #FFC6FF;
     color: black;
   }
+  &.grey{
+    background-color: buttonface;
+    color: black;
+  }
 }
 
 .home{
   margin-top: 20px;
+}
+
+.counter-container{
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px 0px;
+  font-weight: bold;
+  background-color: buttonface;
 }
