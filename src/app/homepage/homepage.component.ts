@@ -25,7 +25,7 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
     this.runnerForm = this.formBuilder.group({
       number: ['', [Validators.required]],
-      numberSort: ['numerical']
+      numberSort: [window.localStorage.getItem("sorting") ? window.localStorage.getItem("sorting") : 'numerical']
     });
     this.lapsForm = this.formBuilder.group({
       laps: [this.laps, [Validators.required]]
@@ -83,6 +83,7 @@ export class HomepageComponent implements OnInit {
     window.localStorage.setItem("lapsSet", JSON.stringify(this.lapsSet));
     this.laps = 7
     window.localStorage.setItem("laps", JSON.stringify(this.laps));
+
     this.modalService.dismissAll();
   }
 
@@ -93,6 +94,8 @@ export class HomepageComponent implements OnInit {
     else{
       this.runnerList.sort((a: { number: number }, b: { number: number }) => a.number - b.number);
     }
+    console.log(this.runnerForm.controls['numberSort'].value)
+    window.localStorage.setItem("sorting",this.runnerForm.controls['numberSort'].value);
     window.localStorage.setItem("runners", JSON.stringify(this.runnerList));
     this.runnerForm.controls['number'].setValue();
     this.router.navigateByUrl('/counter');
